@@ -1,0 +1,189 @@
+
+
+================================================================
+== Vitis HLS Report for 'find_smallest_channel_Pipeline_LOOP_PAIRS'
+================================================================
+* Date:           Tue Sep  3 19:10:52 2024
+
+* Version:        2021.2 (Build 3367213 on Tue Oct 19 02:48:09 MDT 2021)
+* Project:        find_smallest_channel
+* Solution:       find_smallest_channel (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcvu11p-flga2577-1-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  3.294 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |        4|        7|  40.000 ns|  70.000 ns|    4|    7|       no|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------+---------+---------+----------+-----------+-----------+-------+----------+
+        |              |  Latency (cycles) | Iteration|  Initiation Interval  |  Trip |          |
+        |   Loop Name  |   min   |   max   |  Latency |  achieved |   target  | Count | Pipelined|
+        +--------------+---------+---------+----------+-----------+-----------+-------+----------+
+        |- LOOP_PAIRS  |        2|        5|         3|          1|          1|  1 ~ 4|       yes|
+        +--------------+---------+---------+----------+-----------+-----------+-------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|      253|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        -|        -|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        -|       72|    -|
+|Register             |        -|     -|      188|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|      188|      325|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3072|   864000|   432000|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9216|  2592000|  1296000|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name     | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------------+----------+----+---+----+------------+------------+
+    |i_2_fu_181_p2          |         +|   0|  0|  10|           3|           1|
+    |idx_b_fu_206_p2        |         +|   0|  0|  12|           4|           1|
+    |idx_a_fu_201_p2        |         -|   0|  0|  12|           4|           4|
+    |idx_o_fu_212_p2        |         -|   0|  0|  12|           4|           4|
+    |addr_cmp12_fu_239_p2   |      icmp|   0|  0|  29|          64|          64|
+    |addr_cmp8_fu_225_p2    |      icmp|   0|  0|  29|          64|          64|
+    |addr_cmp_fu_308_p2     |      icmp|   0|  0|  29|          64|          64|
+    |icmp_ln1072_fu_279_p2  |      icmp|   0|  0|  18|          28|          28|
+    |icmp_ln69_fu_176_p2    |      icmp|   0|  0|   8|           3|           3|
+    |ch_a_V_fu_326_p3       |    select|   0|  0|   4|           1|           4|
+    |data_V_d0              |    select|   0|  0|  28|           1|          28|
+    |data_a_V_fu_262_p3     |    select|   0|  0|  28|           1|          28|
+    |data_b_V_fu_272_p3     |    select|   0|  0|  28|           1|          28|
+    |select_ln7_fu_294_p3   |    select|   0|  0|   4|           1|           4|
+    |ap_enable_pp0          |       xor|   0|  0|   2|           1|           2|
+    +-----------------------+----------+----+---+----+------------+------------+
+    |Total                  |          |   0|  0| 253|         244|         327|
+    +-----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |ap_done_int              |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1  |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter2  |   9|          2|    1|          2|
+    |i_1_fu_64                |   9|          2|    3|          6|
+    |reuse_addr_reg5_fu_48    |   9|          2|   64|        128|
+    |reuse_addr_reg_fu_56     |   9|          2|   64|        128|
+    |reuse_reg4_fu_52         |   9|          2|   28|         56|
+    |reuse_reg_fu_60          |   9|          2|    4|          8|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  72|         16|  166|        332|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-----------------------------------+----+----+-----+-----------+
+    |                Name               | FF | LUT| Bits| Const Bits|
+    +-----------------------------------+----+----+-----+-----------+
+    |addr_cmp12_reg_420                 |   1|   0|    1|          0|
+    |addr_cmp8_reg_410                  |   1|   0|    1|          0|
+    |addr_cmp_reg_437                   |   1|   0|    1|          0|
+    |ap_CS_fsm                          |   1|   0|    1|          0|
+    |ap_done_reg                        |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1            |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2            |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter3            |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter2_reg   |   1|   0|    1|          0|
+    |i_1_fu_64                          |   3|   0|    3|          0|
+    |idx_a_reg_395                      |   4|   0|    4|          0|
+    |idx_b_reg_400                      |   4|   0|    4|          0|
+    |reuse_addr_reg5_fu_48              |  64|   0|   64|          0|
+    |reuse_addr_reg_fu_56               |  64|   0|   64|          0|
+    |reuse_reg4_fu_52                   |  28|   0|   28|          0|
+    |reuse_reg_fu_60                    |   4|   0|    4|          0|
+    |zext_ln76_2_reg_425                |   4|   0|   64|         60|
+    |zext_ln76_2_reg_425_pp0_iter2_reg  |   4|   0|   64|         60|
+    +-----------------------------------+----+----+-----+-----------+
+    |Total                              | 188|   0|  308|        120|
+    +-----------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++------------------------+-----+-----+------------+-------------------------------------------+--------------+
+|        RTL Ports       | Dir | Bits|  Protocol  |               Source Object               |    C Type    |
++------------------------+-----+-----+------------+-------------------------------------------+--------------+
+|ap_clk                  |   in|    1|  ap_ctrl_hs|  find_smallest_channel_Pipeline_LOOP_PAIRS|  return value|
+|ap_rst                  |   in|    1|  ap_ctrl_hs|  find_smallest_channel_Pipeline_LOOP_PAIRS|  return value|
+|ap_start                |   in|    1|  ap_ctrl_hs|  find_smallest_channel_Pipeline_LOOP_PAIRS|  return value|
+|ap_done                 |  out|    1|  ap_ctrl_hs|  find_smallest_channel_Pipeline_LOOP_PAIRS|  return value|
+|ap_idle                 |  out|    1|  ap_ctrl_hs|  find_smallest_channel_Pipeline_LOOP_PAIRS|  return value|
+|ap_ready                |  out|    1|  ap_ctrl_hs|  find_smallest_channel_Pipeline_LOOP_PAIRS|  return value|
+|trunc_ln60_1            |   in|    3|     ap_none|                               trunc_ln60_1|        scalar|
+|trunc_ln                |   in|    4|     ap_none|                                   trunc_ln|        scalar|
+|trunc_ln1               |   in|    4|     ap_none|                                  trunc_ln1|        scalar|
+|data_V_address0         |  out|    4|   ap_memory|                                     data_V|         array|
+|data_V_ce0              |  out|    1|   ap_memory|                                     data_V|         array|
+|data_V_we0              |  out|    1|   ap_memory|                                     data_V|         array|
+|data_V_d0               |  out|   28|   ap_memory|                                     data_V|         array|
+|data_V_address1         |  out|    4|   ap_memory|                                     data_V|         array|
+|data_V_ce1              |  out|    1|   ap_memory|                                     data_V|         array|
+|data_V_q1               |   in|   28|   ap_memory|                                     data_V|         array|
+|data_V_address2         |  out|    4|   ap_memory|                                     data_V|         array|
+|data_V_ce2              |  out|    1|   ap_memory|                                     data_V|         array|
+|data_V_q2               |   in|   28|   ap_memory|                                     data_V|         array|
+|channel_idx_V_address0  |  out|    4|   ap_memory|                              channel_idx_V|         array|
+|channel_idx_V_ce0       |  out|    1|   ap_memory|                              channel_idx_V|         array|
+|channel_idx_V_we0       |  out|    1|   ap_memory|                              channel_idx_V|         array|
+|channel_idx_V_d0        |  out|    4|   ap_memory|                              channel_idx_V|         array|
+|channel_idx_V_address1  |  out|    4|   ap_memory|                              channel_idx_V|         array|
+|channel_idx_V_ce1       |  out|    1|   ap_memory|                              channel_idx_V|         array|
+|channel_idx_V_q1        |   in|    4|   ap_memory|                              channel_idx_V|         array|
++------------------------+-----+-----+------------+-------------------------------------------+--------------+
+

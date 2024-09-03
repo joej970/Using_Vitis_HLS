@@ -1,0 +1,134 @@
+
+
+================================================================
+== Synthesis Summary Report of 'find_smallest_channel'
+================================================================
++ General Information: 
+    * Date:           Tue Sep  3 19:10:54 2024
+    * Version:        2021.2 (Build 3367213 on Tue Oct 19 02:48:09 MDT 2021)
+    * Project:        find_smallest_channel
+    * Solution:       find_smallest_channel (Vivado IP Flow Target)
+    * Product family: virtexuplus
+    * Target device:  xcvu11p-flga2577-1-e
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +-------------------------------------------------+------+------+---------+---------+----------+---------+------+----------+------+----+-----------+-----------+-----+
+    |                     Modules                     | Issue|      | Latency | Latency | Iteration|         | Trip |          |      |    |           |           |     |
+    |                     & Loops                     | Type | Slack| (cycles)|   (ns)  |  Latency | Interval| Count| Pipelined| BRAM | DSP|     FF    |    LUT    | URAM|
+    +-------------------------------------------------+------+------+---------+---------+----------+---------+------+----------+------+----+-----------+-----------+-----+
+    |+ find_smallest_channel                          |     -|  4.01|       40|  400.000|         -|       41|     -|        no|     -|   -|  703 (~0%)|  663 (~0%)|    -|
+    | + find_smallest_channel_Pipeline_LOOP_POPULATE  |     -|  5.84|       10|  100.000|         -|       10|     -|        no|     -|   -|   11 (~0%)|   59 (~0%)|    -|
+    |  o LOOP_POPULATE                                |     -|  7.30|        8|   80.000|         2|        1|     8|       yes|     -|   -|          -|          -|    -|
+    | o LOOP_STAGES                                   |     -|  7.30|       27|  270.000|         9|        -|     3|        no|     -|   -|          -|          -|    -|
+    |  + find_smallest_channel_Pipeline_LOOP_PAIRS    |     -|  4.01|        7|   70.000|         -|        7|     -|        no|     -|   -|  188 (~0%)|  325 (~0%)|    -|
+    |   o LOOP_PAIRS                                  |     -|  7.30|        5|   50.000|         3|        1|     4|       yes|     -|   -|          -|          -|    -|
+    +-------------------------------------------------+------+------+---------+---------+----------+---------+------+----------+------+----+-----------+-----------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* AP_MEMORY
++-------------------------+----------+
+| Interface               | Bitwidth |
++-------------------------+----------+
+| channel_idx_in_address0 | 3        |
+| channel_idx_in_q0       | 4        |
+| data_in_address0        | 3        |
+| data_in_q0              | 28       |
++-------------------------+----------+
+
+* REGISTER
++---------------+---------+----------+
+| Interface     | Mode    | Bitwidth |
++---------------+---------+----------+
+| min_data_out  | ap_none | 28       |
+| min_index_out | ap_none | 4        |
++---------------+---------+----------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------------------------------+
+| Interface | Type       | Ports                             |
++-----------+------------+-----------------------------------+
+| ap_clk    | clock      | ap_clk                            |
+| ap_rst    | reset      | ap_rst                            |
+| ap_ctrl   | ap_ctrl_hs | ap_done ap_idle ap_ready ap_start |
++-----------+------------+-----------------------------------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------------+-----------+-------------+
+| Argument       | Direction | Datatype    |
++----------------+-----------+-------------+
+| data_in        | in        | ap_int<28>* |
+| channel_idx_in | in        | ap_int<4>*  |
+| min_data_out   | out       | ap_int<28>* |
+| min_index_out  | out       | ap_int<4>*  |
++----------------+-----------+-------------+
+
+* SW-to-HW Mapping
++----------------+-------------------------+---------+----------+
+| Argument       | HW Interface            | HW Type | HW Usage |
++----------------+-------------------------+---------+----------+
+| data_in        | data_in_address0        | port    | offset   |
+| data_in        | data_in_ce0             | port    |          |
+| data_in        | data_in_q0              | port    |          |
+| channel_idx_in | channel_idx_in_address0 | port    | offset   |
+| channel_idx_in | channel_idx_in_ce0      | port    |          |
+| channel_idx_in | channel_idx_in_q0       | port    |          |
+| min_data_out   | min_data_out            | port    |          |
+| min_data_out   | min_data_out_ap_vld     | port    |          |
+| min_index_out  | min_index_out           | port    |          |
+| min_index_out  | min_index_out_ap_vld    | port    |          |
++----------------+-------------------------+---------+----------+
+
+
+================================================================
+== M_AXI Burst Information
+================================================================
+ Note: All burst requests might be further partitioned into multiple requests during RTL generation based on max_read_burst_length or max_write_burst_length settings.
+
+  No burst in design
+
+================================================================
+== Bind Op Report
+================================================================
++-------------------------------------------------+-----+--------+----------+-----+--------+---------+
+| Name                                            | DSP | Pragma | Variable | Op  | Impl   | Latency |
++-------------------------------------------------+-----+--------+----------+-----+--------+---------+
+| + find_smallest_channel                         | 0   |        |          |     |        |         |
+|   stage_2_fu_151_p2                             | -   |        | stage_2  | add | fabric | 0       |
+|   add_ln62_fu_191_p2                            | -   |        | add_ln62 | add | fabric | 0       |
+|  + find_smallest_channel_Pipeline_LOOP_POPULATE | 0   |        |          |     |        |         |
+|    add_ln51_fu_112_p2                           | -   |        | add_ln51 | add | fabric | 0       |
+|  + find_smallest_channel_Pipeline_LOOP_PAIRS    | 0   |        |          |     |        |         |
+|    i_2_fu_181_p2                                | -   |        | i_2      | add | fabric | 0       |
+|    idx_a_fu_201_p2                              | -   |        | idx_a    | sub | fabric | 0       |
+|    idx_b_fu_206_p2                              | -   |        | idx_b    | add | fabric | 0       |
+|    idx_o_fu_212_p2                              | -   |        | idx_o    | sub | fabric | 0       |
++-------------------------------------------------+-----+--------+----------+-----+--------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
++-------------------------+------+------+--------+---------------+---------+------+---------+
+| Name                    | BRAM | URAM | Pragma | Variable      | Storage | Impl | Latency |
++-------------------------+------+------+--------+---------------+---------+------+---------+
+| + find_smallest_channel | 0    | 0    |        |               |         |      |         |
+|   data_V_U              | -    | -    |        | data_V        | rom_np  | auto | 1       |
+|   channel_idx_V_U       | -    | -    |        | channel_idx_V | ram_s2p | auto | 1       |
++-------------------------+------+------+--------+---------------+---------+------+---------+
+
+
+================================================================
+== User Pragma Report
+================================================================
+  No pragmas found
+
