@@ -18,8 +18,16 @@ int main() {
 
 #elif G_PPIXEL == 16
 
-    data_t data[G_NR_OF_INPUTS] = {20, 34, 50, 1, 15, 5, 30, 4};
-    ch_t channels[G_NR_OF_INPUTS] = {0, 1, 2, 3, 4, 5, 6, 7};
+    data_t data_in[G_NR_OF_INPUTS] = {20, 34, 50, 1, 15, 5, 30, 0};
+    ch_t channels_in[G_NR_OF_INPUTS] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+    data_t data[G_ROW_START_BUFFER_LENGTH];
+    ch_t channels[G_ROW_START_BUFFER_LENGTH];
+
+    for(int i = 0; i < G_NR_OF_INPUTS; i++) {
+        data[i] = data_in[i];
+        channels[i] = channels_in[i];
+    }
 
 #elif G_PPIXEL == 8
     data_t data[G_NR_OF_INPUTS] = {15,99,85,63};
@@ -32,8 +40,10 @@ int main() {
     data_t min_data;
     ch_t min_channel;
 
-    find_smallest_channel(data, channels, &min_data, &min_channel);
+    // find_smallest_channel(data, channels, &min_data, &min_channel);
+    // find_smallest_channel_unrolled_16(data, channels, &min_data, &min_channel);
 
+    find_smallest_channel_c_like(data_in, channels_in, &min_data, &min_channel);
     // int index = min_channel.to_int();
     // int value = min_data.to_int();
 

@@ -18,7 +18,7 @@
 
 #define G_DATA_WIDTH (COLS_WIDTH + ROWS_WIDTH)
 
-#define G_PPIXEL (16)
+#define G_PPIXEL (32)
 
 // Row_start value buffer length
 #define G_ROW_START_BUFFER_LENGTH (G_PPIXEL - 1)
@@ -30,7 +30,13 @@
 typedef ap_int<G_DATA_WIDTH> data_t;
 typedef ap_int<LOG2_CEIL(G_PPIXEL)> ch_t;
 
-void find_smallest_channel(data_t data_in[G_NR_OF_INPUTS], ch_t channel_idx_in[G_NR_OF_INPUTS], data_t *min_data_ou, ch_t *min_index_out);
+// void find_smallest_channel(data_t data_in[G_NR_OF_INPUTS], ch_t channel_idx_in[G_NR_OF_INPUTS], data_t *min_data_ou, ch_t *min_index_out);
+void find_smallest_channel(data_t data[G_ROW_START_BUFFER_LENGTH], ch_t channel_idx[G_ROW_START_BUFFER_LENGTH], data_t *min_data_out, ch_t *min_index_out);
+ 
+void find_smallest_channel_unrolled_16(data_t data[G_ROW_START_BUFFER_LENGTH], ch_t channel_idx[G_ROW_START_BUFFER_LENGTH], data_t *min_data_out, ch_t *min_index_out);
+
+void find_smallest_channel_c_like(data_t data[G_NR_OF_INPUTS], ch_t channel_idx[G_NR_OF_INPUTS], data_t *min_data_out, ch_t *min_index_out);
+
 void find_min(data_t data_a, ch_t ch_a, data_t data_b, ch_t ch_b, data_t *min_data, ch_t *min_channel);
 
 #endif // __FIND_SMALLEST_CHANNEL_H__
